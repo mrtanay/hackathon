@@ -26,7 +26,7 @@ Developing unique application never seen before. Learning new technologies in su
 -Improving UI -Integrating Facebook and Google Sign Ins -Improve Algorithms -Contacting Suppliers
 
 ## Built With
-firebase | google-cloud | google-maps | html | css |javascript | bootstrap
+firebase | google-cloud | google-maps | html | css | javascript | bootstrap
 
 ## Try it out
 https://food-pool.com/
