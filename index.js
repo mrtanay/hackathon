@@ -1,5 +1,6 @@
 var db = firebase.firestore();
 
+
 function storeData(){
   var nameText = document.getElementById("name_field").value;
   //var usernameText = document.getElementById("username_field").value;
@@ -20,5 +21,15 @@ function storeData(){
   .then(function(){
   })
   .catch(function(){
-  })
+  });
 }
+
+var list_div = document.querySelector("list_div");
+
+db.collection("Users").onSnapshot(function(querySnapshot){
+  querySnapshot.docChanges().forEach(function(change){
+    if(change.type === "added"){
+      console.log("Location index", change.doc.data().location_index);
+    }
+  });
+});
