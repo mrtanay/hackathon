@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8'/>
+    
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/>
+    <title>Maps</title>
+    
+    <link rel='stylesheet' href='styling.css'/>
+  </head>
+  <body>
+        <div class='page'>
+                <div class='section menu'></div>
+                <div class='section header'>
+                    <h1 align="center" id="msg_disp" ></h1></div>
+                
+                <div class='section content', id = "map"></div>
+                
+                <div class='section feature-1'></div>
+                <div class='section feature-2'></div>
+                <div class='section feature-3'></div>
+                  
+                
+                <div class='section sign-up'><h1 align="center" id="msg_disp_bottom"></h1></div>
+                
+              </div>
+
+              <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
+              <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-firestore.js"></script>
+              
+              
+              <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
+              <script>
+                // Initialize Firebase
+                var config = {
+                  apiKey: "AIzaSyCjRYlftFDFU4DOVGv9MwF06QsY26G-7Jw",
+                  authDomain: "hackpsu-daffd.firebaseapp.com",
+                  databaseURL: "https://hackpsu-daffd.firebaseio.com",
+                  projectId: "hackpsu",
+                  storageBucket: "hackpsu.appspot.com",
+                  messagingSenderId: "21120194301"
+                };
+                firebase.initializeApp(config);
+              </script>
+  
+    <script>
+        //var YOUR_API_KEY = AIzaSyCJGK6V6XZcolpdlxPNTUwmKwYvyn2FOIQ;
+        var db = firebase.firestore();
+        var index = 1;//setting default
+        var name = "";
+        var list_div = document.querySelector("list_div");
+            
+        db.collection("Users").onSnapshot(function(querySnapshot){
+          querySnapshot.docChanges().forEach(function(change){
+            if(change.type === "added"){
+              index = change.doc.data().location_index;
+              name = change.doc.data().name;
+              //console.log(index);
+              //console.log(name);
+            }
+          });
+        });
+        //console.log(index);
+        //console.log(name);
+        function initMap() {
+          var location_index = index;//extract
+          var user_name = name;
+          var location_name;
+          var center_array = [//data prepopulated for better demonstration of concept
+            {coord: {lat: 40.7982134, lng: -77.8686631}, count: 8,  demands:{choice_index_0: 0, choice_index_1: 1, choice_index_2: 2}, sell_loc: "Meet the seller at the East Enterance"},
+            {coord: {lat: 40.7922031, lng: -77.8706264}, count: 12, demands:{choice_index_0: 2, choice_index_1: 0, choice_index_2: 1}, sell_loc: "Meet the seller near the main elevator"},
+            {coord: {lat: 40.7965607, lng: -77.8658628}, count: 5,  demands:{choice_index_0: 0, choice_index_1: 2, choice_index_2: 1}, sell_loc: "Meet at the Weston Community Centre"}
+            ]
+          
+          var choice_array = [
+            {name: "Cheese Pizza", supplier_name: "Canyon Pizza", time: 12, price: 2.50, count: 10},
+            {name: "Pepperoni Pizza", supplier_name: "Brothers Pizza", time: 15, price: 3.00, count: 15},
+            {name: "Boneless Wings", supplier_name: "Wings Over Happy Valley", time: 20, price: 4.00, count: 15}
+          ]
+          if(location_index == 0){
+              location_name = "West Halls";
+          }
+          else if(location_index == 1){
+              location_name = "Business Building";
+          }
+          else if(location_index == 2){
+              location_name = "White Course Apartments";
+          }
+
+          var msg_top = "Congrats! " + (center_array[location_index]).count + " other people at " + location_name + " are also interested in the popular demands";
+          document.getElementById("msg_disp").innerHTML = msg_top;
+
+          var msg_bottom = choice_array[center_array[location_index].demands.choice_index_1].supplier_name + " is bringing " + choice_array[center_array[location_index].demands.choice_index_1].name + " for " + choice_array[center_array[location_index].demands.choice_index_1].price + " Dollars/Slice in " + choice_array[center_array[location_index].demands.choice_index_1].time + " minutes. " + center_array[location_index].sell_loc;
+          document.getElementById("msg_disp_bottom").innerHTML = msg_bottom;
+
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14,
+            center: center_array[location_index].coord
+          });
+          
+          
+          // Create an array of alphabetical characters used to label the markers.
+          //var number_locations = 3;//extract from DB
+          
+          var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    
+          // Add some markers to the map.
+          // Note: The code uses the JavaScript Array.prototype.map() method to
+          // create an array of markers based on a given "locations" array.
+          // The map() method here has nothing to do with the Google Maps API.
+          var markers = locations.map(function(location, i) {
+            return new google.maps.Marker({
+              position: location,
+              label: labels[i % labels.length]
+            });
+          });
+    
+          // Add a marker clusterer to manage the markers.
+          var markerCluster = new MarkerClusterer(map, markers,
+              {imagePath: 'm'});
+        }
+
+        
+        
+        var locations = [
+            //West Halls: 0
+            {lat: 40.796706, lng: -77.866716},
+            {lat: 40.796458, lng: -77.866019},
+            {lat: 40.796637, lng: -77.866282},
+            {lat: 40.797007, lng: -77.867559},
+            {lat: 40.796406, lng: -77.867849},
+            {lat: 40.795675, lng: -77.866427},
+            {lat: 40.795094, lng: -77.866470},
+            {lat: 40.795678, lng: -77.867322},
+            //Business: 1
+            {lat: 40.803832, lng: -77.865073},
+            {lat: 40.803718, lng: -77.865438},
+            {lat: 40.804027, lng: -77.864558},
+            {lat: 40.803536, lng: -77.864917},
+            {lat: 40.803337, lng: -77.865486},
+            {lat: 40.804027, lng: -77.864558},
+            {lat: 40.803536, lng: -77.864917},
+            {lat: 40.803337, lng: -77.865486},
+            {lat: 40.804027, lng: -77.864558},
+            {lat: 40.803536, lng: -77.864917},
+            {lat: 40.803337, lng: -77.865486},
+            {lat: 40.804027, lng: -77.864558},
+            //White Course: 2
+            {lat: 40.790420, lng: -77.871912},
+            {lat: 40.790225, lng: -77.872221},
+            {lat: 40.790201, lng: -77.871685},
+            {lat: 40.789551, lng: -77.872404},
+            {lat: 40.788978, lng: -77.873858}
+        ]
+        
+        </script>
+        <script src="markerclusterer.js">
+        </script>
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJGK6V6XZcolpdlxPNTUwmKwYvyn2FOIQ&callback=initMap">
+        </script>
+
+
+
+
+  </body>
+</html>
