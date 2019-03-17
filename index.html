@@ -1,53 +1,115 @@
-<!Doctype html>
-<html>
-<head>
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+    <title>Food-Pool</title>
+  
+    <link rel='stylesheet' href='styling.css'/>
+  </head>
+  <body>
+        <div class='page'>
+                <div class='section menu'>
+                  <font size="40"> Welcome to Food-Pool </font>
+                </div>
 
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
-  <title>Food Pool</title>
-
-</head>
-<body>
-
-  <div class="main">
-    <p class="sign" align="center">Food Pool Guest Access</p>
-    <form class="form1" action="main.html">      
-      <input class="un" type="text" placeholder="Full Name" id="name_field">
-      <input class="un" type="text" placeholder="Phone" id="phone_field">
-        <p align="center">
-             <label>Select Building</label>
-             <select id = "myList">
-               <option value = "0">Thompson Hall</option>
-               <option value = "1">Business Building</option>
-               <option value = "2">White Course</option>
-             </select>
-        <p>
-      <button class="submit" align="center" onclick="storeData()">Submit</button>
-  </div>
-
-
-  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-firestore.js"></script>
-
-
-  <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyCjRYlftFDFU4DOVGv9MwF06QsY26G-7Jw",
-      authDomain: "hackpsu-daffd.firebaseapp.com",
-      databaseURL: "https://hackpsu-daffd.firebaseio.com",
-      projectId: "hackpsu",
-      storageBucket: "hackpsu.appspot.com",
-      messagingSenderId: "21120194301"
-    };
-    firebase.initializeApp(config);
-  </script>
-
-
-  <script src="index.js"></script>
-
+                <div class='section header'>
+                    <br />
+                    <br />
+                    <br />
+                      <br />
+                  <p align="left">
+                      <br />
+                      <br />
+                    <font size="40">
+                       Click the box to Sign-in or Guest Sign-up. 
+                      </font>
+                      
+                      <br />
+                      <br />
+                      <style>
+                          .button {
+                            background-color: #808080; /* Green */
+                            border: none;
+                            color: white;
+                            text-align: center;
+                            text-decoration: none;
+                            display: inline-block;
+                            font-size: 16px;
+                            margin: 4px 2px;
+                            cursor: pointer;
+                          }
+                          
+                          .button1 {padding: 20px 60px;}
+                          .button2 {padding: 20px 60px;}
+                          
+                        
+                          </style>
+                          </head>
+                          <body>
+                        
+                              <a href="signin.html">   
+                          <button class="button button1">Sign-In</button>
+                              </a>
+                              <br />
+                              <a href="index1.html">
+                          <button class="button button2">Guest Sign-up</button>
+                              </a>
+                          
+                     
+                          
+                          </body>
+                      
+                    
+                     
+                      
+                      
+                      <br/>
+                      <br/>
+                    
+                    
+                      <br/>
+                      <br/>
+                      <br/>
+                      
+                    
+                  
+                        
+                         <font size="15" color="green" face="arial" > Popular demands right now. </font> 
+                        
+                      
+                      
+                      </p>
+                </div>
+                <div class='section content', id = "map">
+                  
+                </div>
+                <div class='section sign-up'>
+                  <p align = 'left'>
+                <font size="12" color='black' face='arial'> Contact Us: </font> <br /> <br /> <br />
+                Email: customercare@food-pool.com <br /> <br />
+                Phone: +1 (XXX)-XXX-XXXX
+                </div>
+                <div class='section feature-1'>
+                    <img src="piiza.jpg" alt="Pizza" style = "width: 300px; height: 280px">
+                </div>
+                <div class='section feature-2'>
+                    <img src="pepsi.jpg" alt="Pepsi" style = "width: 300px; height: 280px">
+                </div>
+                <div class='section feature-3'>
+                    <img src="cookies.jpg" alt="Cookies" style = "width: 300px; height: 280px">
+                </div>
+              </div>
+ <script>
+   function initMap() {
+   var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14.5,
+            center: {lat: 40.7975675, lng: -77.8673907}
+          });
+   }
+ </script>
+ <script async defer
+ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJGK6V6XZcolpdlxPNTUwmKwYvyn2FOIQ&callback=initMap">
+ </script>
   </body>
 </html>
