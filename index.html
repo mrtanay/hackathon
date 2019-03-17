@@ -1,0 +1,53 @@
+<!Doctype html>
+<html>
+<head>
+
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+  <title>Food Pool</title>
+
+</head>
+<body>
+
+  <div class="main">
+    <p class="sign" align="center">Food Pool Login</p>
+    <form class="form1" action="main.html">      
+      <input class="un" type="text" placeholder="Full Name" id="name_field">
+      <input class="un" type="text" placeholder="Phone" id="phone_field">
+        <p align="center">
+             <label>Select Building</label>
+             <select id = "myList">
+               <option value = "0">Thompson Hall</option>
+               <option value = "1">Business Building</option>
+               <option value = "2">White Course</option>
+             </select>
+        <p>
+      <button class="submit" align="center" onclick="storeData()">Submit</button>
+  </div>
+
+
+  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-firestore.js"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCjRYlftFDFU4DOVGv9MwF06QsY26G-7Jw",
+      authDomain: "hackpsu-daffd.firebaseapp.com",
+      databaseURL: "https://hackpsu-daffd.firebaseio.com",
+      projectId: "hackpsu",
+      storageBucket: "hackpsu.appspot.com",
+      messagingSenderId: "21120194301"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+
+  <script src="index.js"></script>
+
+  </body>
+</html>
